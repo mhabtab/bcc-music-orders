@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+    db:
+        command: ["postgres", "-c", "log_statement=all"]
+        image: postgres:15
+        volumes:
+            - db-data:/var/lib/postgresql/data
+        ports:
+            - "5543:5432/tcp"
+        environment:
+            - POSTGRES_USER=app
+            - POSTGRES_PASSWORD=app
+            - POSTGRES_HOST_AUTH_METHOD=trust
+    directus:
+        image: directus/directus:latest
+        ports:
+            - 8055:8055
+        volumes:
+            - uploads:/directus/uploads
+        environment:
+            KEY: "0000"
+            SECRET: "0000"
+            ADMIN_EMAIL: "admin@bcc.music"
+            ADMIN_PASSWORD: "123456"
+            WEBSOCKETS_ENABLED: true
+            DB_CLIENT: "pg"
+            DB_CONNECTION_STRING: postgres://app:app@db:5432/app?sslmode\=disable
+
+volumes:
+    db-data:
+        driver: local
+    uploads:
+        driver: local
