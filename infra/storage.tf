@@ -7,13 +7,13 @@ resource "azurerm_storage_account" "storage" {
 
   network_rules {
     default_action             = "Allow"
-    virtual_network_subnet_ids = [azurerm.azurerm_subnet.internal.id]
+    virtual_network_subnet_ids = [azurerm_subnet.internal.id]
   }
 }
 
 
 resource "azurerm_storage_container" "uploads" {
-  name                  = "vhds"
+  name                  = "uploads"
   storage_account_name  = azurerm_storage_account.storage.name
   container_access_type = "private"
 }
