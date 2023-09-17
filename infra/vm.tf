@@ -32,6 +32,20 @@ resource "azurerm_network_security_rule" "web443" {
   network_security_group_name = azurerm_network_security_group.main.name
 }
 
+resource "azurerm_network_security_rule" "ssh" {
+  name                        = "web-traffic-443"
+  priority                    = 200
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "22"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = data.azurerm_resource_group.main.name
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
 resource "azurerm_virtual_network" "main" {
   name                = "network"
   address_space       = ["10.0.0.0/16"]
