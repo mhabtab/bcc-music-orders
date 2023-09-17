@@ -1,13 +1,25 @@
 version: "3.8"
 
 services:
+    nginx:
+        image: nginx:1.15-alpine
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./data/nginx:/etc/nginx/conf.d
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
+    certbot:
+        image: certbot/certbot
+        volumes:
+            - ./data/certbot/conf:/etc/letsencrypt
+            - ./data/certbot/www:/var/www/certbot
     db:
         command: ["postgres", "-c", "log_statement=all"]
         image: postgres:15
         volumes:
             - db-data:/var/lib/postgresql/data
-        ports:
-            - "5543:5432/tcp"
         environment:
             - POSTGRES_USER=app
             - POSTGRES_PASSWORD=app
