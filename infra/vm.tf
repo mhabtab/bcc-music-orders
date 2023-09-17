@@ -51,7 +51,7 @@ resource "azurerm_virtual_machine" "main" {
   }
   os_profile {
     computer_name  = "directus"
-    admin_username = "admin"
+    admin_username = "manager"
     admin_password = "Password1234!"
   }
   os_profile_linux_config {
