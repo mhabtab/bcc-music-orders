@@ -4,7 +4,7 @@ resource "azurerm_network_security_group" "main" {
   resource_group_name = data.azurerm_resource_group.main.name
 }
 
-resource "azurerm_network_security_rule" "80" {
+resource "azurerm_network_security_rule" "web80" {
   name                        = "web-traffic-80"
   priority                    = 100
   direction                   = "Inbound"
@@ -18,7 +18,7 @@ resource "azurerm_network_security_rule" "80" {
   network_security_group_name = azurerm_network_security_group.main.name
 }
 
-resource "azurerm_network_security_rule" "443" {
+resource "azurerm_network_security_rule" "web443" {
   name                        = "web-traffic-443"
   priority                    = 100
   direction                   = "Inbound"
