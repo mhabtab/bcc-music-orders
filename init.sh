@@ -43,8 +43,6 @@ echo "### Starting nginx ..."
 docker compose up --force-recreate -d nginx
 echo
 
-exit
-
 echo "### Deleting dummy certificate for $domains ..."
 docker compose run --rm --entrypoint "\
   rm -Rf /etc/letsencrypt/live/$domains && \
