@@ -31,10 +31,10 @@ services:
         volumes:
             - uploads:/directus/uploads
         environment:
-            KEY: "0000"
-            SECRET: "0000"
-            ADMIN_EMAIL: "admin@bcc.music"
-            ADMIN_PASSWORD: "123456"
+            KEY: ${KEY}
+            SECRET: ${SECRET}
+            ADMIN_EMAIL: ${ADMIN_EMAIL}
+            ADMIN_PASSWORD: ${ADMIN_PASSWORD}
             WEBSOCKETS_ENABLED: true
             DB_CLIENT: "pg"
             DB_CONNECTION_STRING: postgres://app:app@db:5432/app?sslmode\=disable
