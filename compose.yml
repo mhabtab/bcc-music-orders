@@ -30,11 +30,9 @@ services:
             - 8055:8055
         volumes:
             - uploads:/directus/uploads
+        env_file:
+            - directus.env
         environment:
-            KEY: ${KEY}
-            SECRET: ${SECRET}
-            ADMIN_EMAIL: ${ADMIN_EMAIL}
-            ADMIN_PASSWORD: ${ADMIN_PASSWORD}
             WEBSOCKETS_ENABLED: true
             DB_CLIENT: "pg"
             DB_CONNECTION_STRING: postgres://app:app@db:5432/app?sslmode\=disable
