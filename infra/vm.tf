@@ -5,6 +5,14 @@ resource "azurerm_virtual_network" "main" {
   resource_group_name = data.azurerm_resource_group.main.name
 }
 
+resource "azurerm_public_ip" "machine-public-ip" {
+  name                = "machine-public-ip"
+  resource_group_name = data.azurerm_resource_group.main.name
+  location            = data.azurerm_resource_group.main.location
+  allocation_method   = "Dynamic"
+}
+
+
 resource "azurerm_subnet" "internal" {
   name                 = "internal"
   resource_group_name  = data.azurerm_resource_group.main.name
@@ -21,6 +29,8 @@ resource "azurerm_network_interface" "main" {
     name                          = "nic-config"
     subnet_id                     = azurerm_subnet.internal.id
     private_ip_address_allocation = "Dynamic"
+
+    public_ip_address_id = azurerm_public_ip.machine-public-ip.id
   }
 }
 
