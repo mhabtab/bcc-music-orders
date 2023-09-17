@@ -1,3 +1,23 @@
+resource "azurerm_network_security_group" "main" {
+  name                = "security-group"
+  location            = data.azurerm_resource_group.main.location
+  resource_group_name = data.azurerm_resource_group.main.name
+}
+
+resource "azurerm_network_security_rule" "main" {
+  name                        = "web-traffic"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "80,443"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = data.azurerm_resource_group.main.name
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
 resource "azurerm_virtual_network" "main" {
   name                = "network"
   address_space       = ["10.0.0.0/16"]
@@ -11,7 +31,6 @@ resource "azurerm_public_ip" "machine-public-ip" {
   location            = data.azurerm_resource_group.main.location
   allocation_method   = "Dynamic"
 }
-
 
 resource "azurerm_subnet" "internal" {
   name                 = "internal"
