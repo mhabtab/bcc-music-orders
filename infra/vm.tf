@@ -34,7 +34,7 @@ resource "azurerm_network_security_rule" "web443" {
 
 resource "azurerm_network_security_rule" "ssh" {
   name                        = "web-traffic-443"
-  priority                    = 200
+  priority                    = 250
   direction                   = "Inbound"
   access                      = "Allow"
   protocol                    = "Tcp"
