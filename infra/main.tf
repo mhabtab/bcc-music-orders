@@ -10,6 +10,10 @@ terraform {
   }
 }
 
+provider "azurerm" {
+  features {}
+}
+
 data "azurerm_resource_group" "main" {
   name = local.props.azure.resource_group
 }
