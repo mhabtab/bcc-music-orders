@@ -25,7 +25,8 @@ services:
             - POSTGRES_PASSWORD=app
             - POSTGRES_HOST_AUTH_METHOD=trust
     directus:
-        image: directus/directus:latest
+        build: 
+            context: ./ 
         ports:
             - 8055:8055
         volumes:
