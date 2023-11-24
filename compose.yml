@@ -30,7 +30,7 @@ services:
         ports:
             - 8055:8055
         volumes:
-            - uploads:/directus/uploads
+            - ./uploads:/directus/uploads
         env_file:
             - directus.env
         environment:
