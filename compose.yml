@@ -37,9 +37,8 @@ services:
             WEBSOCKETS_ENABLED: true
             DB_CLIENT: "pg"
             DB_CONNECTION_STRING: postgres://app:app@db:5432/app?sslmode\=disable
-
-volumes:
-    db-data:
-        driver: local
-    uploads:
-        driver: local
+        volumes:
+            db-data:
+                driver: local
+            uploads:
+                driver: local
